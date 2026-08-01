@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CALCULATRICE</title>
+  </head>
+  <body>
+    <button>On</button>
+    <button onclick="console.log((a1 = 1))">1</button>
+    <button onclick="console.log((b1 = 2))">2</button>
+    <button onclick="console.log((c1 = 3))">3</button>
+    <button onclick="console.log((d1 = 4))">4</button>
+    <button onclick="console.log((e1 = 5))">5</button>
+    <button onclick="console.log((f1 = 6))">6</button>
+    <button onclick="console.log((g1 = 7))">7</button>
+    <button onclick="console.log((h1 = 8))">8</button>
+    <button onclick="console.log((i1 = 9))">9</button>
+    <button onclick="console.log((j1 = 0))">0</button>
+    <button onclick="console.log()"></button>
+    <button onclick="operator = '+'">+</button>
+    <button onclick="operator = '-'">+</button>
+    <button onclick="operator = '*'">+</button>
+    <button onclick="operator = '/'">+</button>
+    <button onclick="console.log((a2 = 1))">1</button>
+    <button onclick="console.log((b2 = 2))">2</button>
+    <button onclick="console.log((c2 = 3))">3</button>
+    <button onclick="console.log((d2 = 4))">4</button>
+    <button onclick="console.log((e2 = 5))">5</button>
+    <button onclick="console.log((f2 = 6))">6</button>
+    <button onclick="console.log((g2 = 7))">7</button>
+    <button onclick="console.log((h2 = 8))">8</button>
+    <button onclick="console.log((i2 = 9))">9</button>
+    <button onclick="console.log((j2 = 0))">0</button>
+    <button onclick="console.log(calculatrice(n1, n1, operator))"></button>
+    <button onclick="console.log(`Ans: ${(result = 0)}`)">DEL</button>
+    <button onclick="result = 0">OFF</button>
+    <style>
+      button{
+        background-color: rgb(183, 183, 183);
+        color:rgb(10, 17, 20);
+        border:black;
+    </style>
+    <script>
+      let a1, b1, c1, d1, e1, f1, g1, h1, i1, j1;
+      let a2, b2, c2, d2, e2, f2, g2, h2, i2, j2;
+      let result;
+      let operator = " ";
+      function Calculatrice(n1, n2, operator) {
+        console.log("${n1}" + "operator" + "${n2}");
+        if ((operator = "+")) {
+          console.log(n1 + n2);
+          result = n1 + n2;
+        } else if ((operator = "-")) {
+          console.log(n1 - n2);
+          result = n1 - n2;
+        } else if ((operator = "*")) {
+          console.log(n1 * n2);
+          result = n1 * n2;
+        } else if ((operator = "/")) {
+          console.log(n1 / n2);
+          result = n1 / n2;
+        }
+      }
+    </script>
+  </body>
+</html>

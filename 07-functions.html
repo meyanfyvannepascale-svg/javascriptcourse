@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>function</title>
+  </head>
+  <body>
+    <script>
+      let cost;
+      function calculateTax(cost) {
+        let taxPercentage = Math.random();
+        console.log(taxPercentage);
+        console.log(cost * taxPercentage);
+      }
+      calculateTax(2000);
+      calculateTax(5000);
+      const product = {
+        name: "combo lips",
+        price: 3500,
+      };
+      product.peremption = "12/01/27";
+      console.log(product);
+      console.log(product.price);
+      delete product.name;
+      console.log(product);
+      console.log(JSON.stringify(product));
+      const jsonString = JSON.stringify(product);
+      JSON.parse(JSON.stringify(product));
+    </script>
+  </body>
+</html>
