@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <p>Rock paper scissors</p>
+    <button
+      onclick="
+        let player = 'rock';
+        comparaison(player);
+      "
+    >
+      rock
+    </button>
+    <button
+      onclick="
+        player = 'paper';
+        comparaison(player);
+      "
+    >
+      paper
+    </button>
+    <button
+      onclick="
+        player = 'scissors';
+        comparaison(player);
+      "
+    >
+      scissors
+    </button>
+    <script>
+      let result = "";
+      function pickcomputerMove() {
+        let computerMove = "";
+        let randomNumber;
+
+        console.log(" L'ordinateur joue");
+        randomNumber = Math.random();
+        if (randomNumber < 1 / 5) {
+          computerMove = "rock";
+        } else if (randomNumber >= 1 / 5 && randomNumber <= 1 / 3) {
+          computerMove = "scissors";
+        } else if (randomNumber > 1 / 3) {
+          computerMove = "paper";
+        }
+        console.log(computerMove);
+        return computerMove;
+      }
+      function comparaison(player) {
+        const computerMove = pickcomputerMove();
+        /* if (player===computerMove) {
+          console.log("equality");
+        } else if ( player==='paper'&& computerMove==='rock'
+        ) {
+          console.log("COMPUTER win");
+        } else if (
+          computerMove ==='paper'&& player==='rock'
+        ) {
+          console.log("player WIN");
+        } else if (computerMove === randomNumber) {
+          console.log("UNE EGALITE");
+        } else {
+          console.log("YOU WIN");
+        }*/
+        if (player === "scissors") {
+          if (computerMove === "paper") {
+            result = "you win";
+          } else if (computerMove === "rock") {
+            result = "computer win";
+          }
+        }
+        if (player === "paper") {
+          if (computerMove === "scissors") {
+            result = "computer win";
+          } else if (computerMove === "rock") {
+            result = "you win";
+          }
+        }
+        if (player === "rock") {
+          if (computerMove === "paper") {
+            result = "computer win";
+          } else if (computerMove === "scissors") {
+            result = "you win";
+          }
+        }
+        if (player === computerMove) {
+          result = "equality";
+        }
+        alert(result);
+        return result;
+      }
+    </script>
+  </body>
+</html>
