@@ -31,6 +31,11 @@
     </button>
     <script>
       let result = "";
+      const score = {
+        win: 0,
+        lose: 0,
+        equality: 0,
+      };
       function pickcomputerMove() {
         let computerMove = "";
         let randomNumber;
@@ -49,20 +54,7 @@
       }
       function comparaison(player) {
         const computerMove = pickcomputerMove();
-        /* if (player===computerMove) {
-          console.log("equality");
-        } else if ( player==='paper'&& computerMove==='rock'
-        ) {
-          console.log("COMPUTER win");
-        } else if (
-          computerMove ==='paper'&& player==='rock'
-        ) {
-          console.log("player WIN");
-        } else if (computerMove === randomNumber) {
-          console.log("UNE EGALITE");
-        } else {
-          console.log("YOU WIN");
-        }*/
+
         if (player === "scissors") {
           if (computerMove === "paper") {
             result = "you win";
@@ -87,9 +79,29 @@
         if (player === computerMove) {
           result = "equality";
         }
-        alert(result);
+        if (result === "you win") {
+          score.win++;
+        }
+        if (result === "computer win") {
+          score.lose++;
+        }
+        if (result === "equality") {
+          score.equality++;
+        }
+        alert(
+          `you played ${player},computer played ${computerMove}, result is ${result} \n win:${score.win},lose: ${score.lose},equality: ${score.equality}`,
+        );
         return result;
       }
     </script>
+    <button
+      onclick="
+        score.win = 0;
+        score.lose = 0;
+        score.equality = 0;
+      "
+    >
+      Reset score
+    </button>
   </body>
 </html>
