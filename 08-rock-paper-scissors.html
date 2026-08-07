@@ -29,13 +29,20 @@
     >
       scissors
     </button>
+    <p class="js-computerMove"></p>
+    <p class="js-result"></p>
+    <p class="js-score"></p>
+
     <script>
-      let result = "";
-      const score = {
+      let result = JSON.parse(localStorage.getItem("result"));
+      let score = JSON.parse(localStorage.getItem("score")) || {
         win: 0,
         lose: 0,
         equality: 0,
       };
+      /* document.querySelector(".js-result").innerHTML =
+        `you played ${player},computer played ${computerMove}, result is ${result}`;*/
+
       function pickcomputerMove() {
         let computerMove = "";
         let randomNumber;
@@ -79,6 +86,8 @@
         if (player === computerMove) {
           result = "equality";
         }
+        localStorage.setItem("result", JSON.stringify(result));
+
         if (result === "you win") {
           score.win++;
         }
@@ -88,9 +97,17 @@
         if (result === "equality") {
           score.equality++;
         }
-        alert(
+
+        localStorage.setItem("score", JSON.stringify(score));
+
+        document.querySelector(".js-result").innerHTML = result;
+        document.querySelector(".js-score").innerHTML =
+          `Wins:${score.win},Loses:${score.lose},Equality:${score.equality}`;
+        document.querySelector(".js-computerMove").innerHTML =
+          `computer played ${computerMove}`;
+        /*alert(
           `you played ${player},computer played ${computerMove}, result is ${result} \n win:${score.win},lose: ${score.lose},equality: ${score.equality}`,
-        );
+        );*/
         return result;
       }
     </script>
@@ -99,6 +116,9 @@
         score.win = 0;
         score.lose = 0;
         score.equality = 0;
+        localStorage.removeItem('score');
+        document.querySelector('.js-score').innerHTML =
+          `Wins:${score.win},Loses:${score.lose},Equality:${score.equality}`;
       "
     >
       Reset score

@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CALCULATRICE</title>
+  </head>
+  <body>
+    <button
+      onclick="
+        alert(
+          'cette page ne prends en compte que des nombres a deux chiffres  exemple: 01,12',
+        );
+        alert('Apres avoir entree le premier nombre mettre un espacement');
+      "
+    >
+      On
+    </button>
+    <input placeholder="00" class="js-number-input" />
+    <button onclick="recuperation(1)">1</button>
+    <button onclick="recuperation(2)">2</button>
+    <button onclick="recuperation(3)">3</button>
+    <button onclick="recuperation(4)">4</button>
+    <button onclick="recuperation(5)">5</button>
+    <button onclick="recuperation(6)">6</button>
+    <button onclick="recuperation(7)">7</button>
+    <button onclick="recuperation(8)">8</button>
+    <button onclick="recuperation(9)">9</button>
+    <button onclick="recuperation(0)">0</button>
+    <button
+      onclick="
+        ((operator = ''),
+          unitTodecimal(val1, val2),
+          alert('entree un operateur'))
+      "
+    >
+      espace
+    </button>
+
+    <button onclick="((operator = '+'), console.log('+'))">+</button>
+    <button onclick="((operator = '-'), console.log('-'))">-</button>
+    <button onclick="((operator = '*'), console.log('*'))">*</button>
+    <button onclick="((operator = '/'), console.log('/'))">/</button>
+    <button
+      onclick="
+        (unitTodecimal(val1, val2), console.log(Calculatrice(n1, n2, operator)))
+      "
+    >
+      =
+    </button>
+    <button onclick="console.log(`Ans: ${result}`)">ANS</button>
+    <button
+      onclick="
+        (console.log(`Ans: ${(result = 0)}`), console.log((operator = '')))
+      "
+    >
+      DEL
+    </button>
+    <button onclick="((result = 0), console.log((operator = '')))">OFF</button>
+    <style>
+      button {
+        background-color: rgb(183, 183, 183);
+        color: rgb(10, 17, 20);
+        border: black;
+      }
+    </style>
+    <script>
+      i = 0;
+      let val1, val2;
+      function recuperation(entree) {
+        const inputElement = document.querySelector(".js-number-input");
+        if (inputElement.innerText === "00") {
+          inputElement.innerHTML = `${entree}`;
+          val1 = Number(inputElement.value);
+        } else {
+          inputElement.innerHTML = `${entree}`;
+          val2 = Number(inputElement.value);
+        }
+      }
+    </script>
+  </body>
+</html>

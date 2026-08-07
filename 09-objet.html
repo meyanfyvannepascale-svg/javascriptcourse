@@ -8,9 +8,20 @@
       const product = {
         name: "socks",
         price: 1090,
+        fnct: function Prix(price) {
+          price = price + 1;
+          return price;
+        },
+        car: {
+          brand: "toyota",
+          model: "corolla",
+          ["faster"]: true,
+        },
       };
+      product.car.faster = true;
       console.log(product);
       console.log(product.price);
+      console.log(product["name"]);
 
       product.name = "car";
       console.log(product);
@@ -18,6 +29,9 @@
       console.log(product);
       delete product.price;
       console.log(product);
+      console.log(JSON.stringify(product));
+      console.log("hey".length);
+      console.log("hey".toUpperCase());
     </script>
   </body>
 </html>
