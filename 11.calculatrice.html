@@ -14,66 +14,144 @@
     >
       On
     </button>
-    <input placeholder="00" class="js-number-input" />
-    <button onclick="recuperation(1)">1</button>
-    <button onclick="recuperation(2)">2</button>
-    <button onclick="recuperation(3)">3</button>
-    <button onclick="recuperation(4)">4</button>
-    <button onclick="recuperation(5)">5</button>
-    <button onclick="recuperation(6)">6</button>
-    <button onclick="recuperation(7)">7</button>
-    <button onclick="recuperation(8)">8</button>
-    <button onclick="recuperation(9)">9</button>
-    <button onclick="recuperation(0)">0</button>
-    <button
-      onclick="
-        ((operator = ''),
-          unitTodecimal(val1, val2),
-          alert('entree un operateur'))
+    <div
+      id="operation"
+      style="
+        display: flexbox;
+        border-color: black;
+        background-color: aliceblue;
+        justify-content: flex-end;
       "
-    >
-      espace
-    </button>
-
-    <button onclick="((operator = '+'), console.log('+'))">+</button>
-    <button onclick="((operator = '-'), console.log('-'))">-</button>
-    <button onclick="((operator = '*'), console.log('*'))">*</button>
-    <button onclick="((operator = '/'), console.log('/'))">/</button>
-    <button
-      onclick="
-        (unitTodecimal(val1, val2), console.log(Calculatrice(n1, n2, operator)))
-      "
-    >
-      =
-    </button>
+    ></div>
+    <div id="clavier">
+      <button onclick="recuperation(1)">1</button>
+      <button onclick="recuperation(2)">2</button>
+      <button onclick="recuperation(3)">3</button>
+      <button onclick="recuperation(4)">4</button>
+      <button onclick="recuperation(5)">5</button>
+      <button onclick="recuperation(6)">6</button>
+      <button onclick="recuperation(7)">7</button>
+      <button onclick="recuperation(8)">8</button>
+      <button onclick="recuperation(9)">9</button>
+      <button onclick="recuperation(0)">0</button>
+      <button onclick="((operator = '+'), console.log('+'))">+</button>
+      <button onclick="((operator = '-'), console.log('-'))">-</button>
+      <button onclick="((operator = '*'), console.log('*'))">*</button>
+      <button onclick="((operator = '/'), console.log('/'))">/</button>
+      <button
+        onclick="
+          (unitTodecimal(val1, val2),
+            console.log(Calculatrice(n1, n2, operator)),
+            (operation.textContent =
+              localStorage.getItem('operation') + '=' + `${result}`),
+            localStorage.setItem('operation', operation.textContent))
+        "
+      >
+        =
+      </button>
+    </div>
     <button onclick="console.log(`Ans: ${result}`)">ANS</button>
     <button
       onclick="
-        (console.log(`Ans: ${(result = 0)}`), console.log((operator = '')))
+        (console.log(`Ans: ${(result = 0)}`),
+          console.log((operator = '')),
+          (operation.textContent = ''),
+          localStorage.setItem('operation', ''),
+          (result = 0),
+          (operator = ''))
       "
     >
       DEL
     </button>
-    <button onclick="((result = 0), console.log((operator = '')))">OFF</button>
+    <button
+      onclick="
+        ((result = 0),
+          console.log((operator = '')),
+          (operation.textContent = ''),
+          localStorage.setItem('operation', ''),
+          (result = 0),
+          (operator = ''))
+      "
+    >
+      OFF
+    </button>
+
     <style>
       button {
         background-color: rgb(183, 183, 183);
         color: rgb(10, 17, 20);
         border: black;
       }
+      #clavier {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
     </style>
     <script>
+      const clavier = document.getElementById("clavier");
+      const operation = document.getElementById("operation");
+
+      localStorage.setItem("operation", operation.textContent);
+      clavier.addEventListener("click", function (event) {
+        if (event.target.textContent === "=") {
+          return;
+        } else {
+          operation.textContent =
+            localStorage.getItem("operation") + event.target.textContent;
+
+          localStorage.setItem("operation", operation.textContent);
+        }
+      });
       i = 0;
       let val1, val2;
       function recuperation(entree) {
-        const inputElement = document.querySelector(".js-number-input");
-        if (inputElement.innerText === "00") {
-          inputElement.innerHTML = `${entree}`;
-          val1 = Number(inputElement.value);
-        } else {
-          inputElement.innerHTML = `${entree}`;
-          val2 = Number(inputElement.value);
+        if (i === 0) {
+          console.log(entree);
+          val1 = entree;
+          console.log(`val1,${val1}`);
+          i++;
+        } else if (i === 1) {
+          console.log(entree);
+          val2 = entree;
+          console.log(`val2,${val2}`);
+          if (event.key != "=") {
+            unitTodecimal(val1, val2);
+          }
+          i = 0;
         }
+      }
+      //recupere les chiffres saisis
+      let operator = "";
+      function unitTodecimal(val1, val2) {
+        if (operator === "") {
+          n1 = val1 * 10 + val2;
+          console.log(`n1:${n1}`);
+        } else {
+          n2 = val1 * 10 + val2;
+          console.log(`n2:${n2}`);
+        }
+        val1 = 0;
+        val2 = 0;
+      } //pour transformer les unites entrees en nombre
+      let result;
+      function Calculatrice(n1, n2, operator) {
+        console.log(`${n1}` + `${operator}` + `${n2}`);
+        if (operator === "+") {
+          console.log(n1 + n2);
+          result = n1 + n2;
+        } else if (operator === "-") {
+          console.log(n1 - n2);
+          result = n1 - n2;
+        } else if (operator === "*") {
+          console.log(n1 * n2);
+          result = n1 * n2;
+        } else if (operator === "/") {
+          console.log(n1 / n2);
+          result = n1 / n2;
+        }
+        alert(result);
+        operator = " "; // je vide l'operateur pour pouvoir utiliser la fonction unitTodecimal pour les prochaines operations
       }
     </script>
   </body>
