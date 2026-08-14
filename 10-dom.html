@@ -3,13 +3,17 @@
   <head>
     <title>DOM</title>
     <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+      }
       p {
-        color: rgb(31, 2, 58);
+        color: rgb(24, 4, 24);
       }
       .subscribe-button {
         border: none;
-        background-color: rgb(46, 223, 164);
-        color: rgb(6, 5, 60);
+        background-color: rgb(0, 0, 0);
+        color: rgb(243, 243, 243);
         padding-top: 10px;
         padding-left: 14px;
         padding-right: 14px;
@@ -18,25 +22,50 @@
         border-radius: 50px;
         cursor: pointer;
       }
+      .is-subscribed {
+        background-color: rgb(28, 196, 47);
+        color: rgb(6, 5, 60);
+      }
+      .cost-input {
+        padding: 10px;
+      }
+      .total-cost {
+      }
+      .calculate-button {
+        padding: 10px;
+        background-color: rgb(28, 196, 47);
+        color: rgb(255, 255, 255);
+      }
     </style>
   </head>
   <body>
     <p>YouTube Subscribe Button</p>
-    <button onclick="Subscribe()" class="js-subscribe-button">Subscribe</button>
+    <button onclick="Subscribe()" class="js-subscribe-button subscribe-button">
+      Subscribe
+    </button>
     <p>Amazon Shipping Calculator</p>
-    <p>price > $40 => +$10 shipping</p>
-    <p>price < $40 => Free shipping</p>
+    <p>price < $40 => +$10 shipping</p>
+    <p>price > $40 => Free shipping</p>
     <input
       placeholder="prix de la commande"
-      class="js-cost-input"
+      class="js-cost-input cost-input"
       onkeydown="
         console.log('typing');
         console.log(event.key);
+        objectInput(event);
       "
     />
-    <button onclick="calculateTotal()">Calculate</button>
-    <p class="js-total-cost"></p>
+    <button onclick="calculateTotal()" class="calculate-button">
+      Calculate
+    </button>
+    <p class="js-total-cost total-cost"></p>
+    <p style="font-style: italic">Rock Paper Scissors</p>
     <script>
+      function objectInput(event) {
+        if (event === true) {
+          calculateTotal();
+        }
+      }
       function calculateTotal() {
         var inputElement = document.querySelector(".js-cost-input");
         let cost = Number(inputElement.value);
@@ -51,8 +80,10 @@
         const buttonElement = document.querySelector(".js-subscribe-button");
         if (buttonElement.innerText === "Subscribe") {
           buttonElement.innerHTML = "Subscribed";
+          buttonElement.classList.add("is-subscribed");
         } else {
-          buttonElement.innerHTML = "subscribe";
+          buttonElement.innerHTML = "Subscribe";
+          buttonElement.classList.remove("is-subscribed");
         }
       }
       //const buttonElement= import 08-rock-paper-scissors from "./08-rock-paper-scissors";
